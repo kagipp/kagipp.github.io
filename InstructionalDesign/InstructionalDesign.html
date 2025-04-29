@@ -18,8 +18,9 @@
 <body>
     <h1>A Data Communication Quiz</h1>
     <p>Precisely communicate the results of analyses.</p>
-    <p>Free & No Account Necessary (Unburdensome & Private) (Rare!)</p>
-    <p><i>Disclaimer: data is fake.</i></p>
+    <p><i>Disclaimer: some of the data is fake.</i></p>
+
+    
 
     <section id="quiz">
         <div class="question" id="q1">
@@ -55,16 +56,19 @@
         <div class="question" id="q3">
             <h2>3: Comparing Distributions</h2>
             <img class="two" src="diabetesPredictor.png" alt="Glucose Densities" height="500">
+            <label>What's the difference between the means?</label>
+            <select id="meanDiff">
+                <option value="">-- Select --</option>
+                <option value="50">50 mg/dL</option>
+                <option value="100">100 mg/dL</option>
+            </select>
         </div>
     </section>
     
-    <!-- --------  NEW QUESTIONS  -------- -->
     <section id="quiz">
-        <!-- 4: Identify – logistic threshold -->
         <div class="question" id="q4">
             <h2>4: Glucose Threshold</h2>
-            <!-- swap in your real S-curve image if desired -->
-            <img src="glucoseLogistic.png" alt="Logistic curve – Glucose" height="450">
+            <img src="diabetesLogisticCurve.png" alt="Logistic curve – Glucose" height="450">
             <div class="answer">
                 <label>
                     At approximately what glucose value does the predicted probability of diabetes
@@ -76,23 +80,6 @@
                     <option value="125">≈ 125 mg/dL</option>
                     <option value="150">≈ 150 mg/dL</option>
                     <option value="200">≈ 200 mg/dL</option>
-                </select>
-            </div>
-        </div>
-
-        <!-- 5: Decide – screening priority -->
-        <div class="question" id="q5">
-            <h2>5: Screening Priority</h2>
-            <p>
-                A clinic can monitor <em>only one</em> measurement for early diabetes screening.
-                Based on the plots and model results, which metric should be prioritised?
-            </p>
-            <div class="answer">
-                <select id="screeningChoice">
-                    <option value="">-- Select --</option>
-                    <option value="glucose">High Glucose</option>
-                    <option value="skin">High Skin Thickness</option>
-                    <option value="neither">Neither – use a different test</option>
                 </select>
             </div>
         </div>
@@ -112,7 +99,6 @@
             trendSelect.disabled = true;
             this.disabled = true;
 
-            // Reveal Q2
             document.getElementById('q2').style.display = 'block';
         });
 
