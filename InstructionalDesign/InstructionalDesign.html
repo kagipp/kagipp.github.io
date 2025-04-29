@@ -82,9 +82,8 @@
                 <select id="glucoseThreshold">
                     <option value="">-- Select --</option>
                     <option value="100">≈ 100 mg/dL</option>
-                    <option value="125">≈ 125 mg/dL</option>
-                    <option value="150">≈ 150 mg/dL</option>
-                    <option value="200">≈ 200 mg/dL</option>
+                    <option value="140">≈ 140 mg/dL</option>
+                    <option value="175">≈ 175 mg/dL</option>
                 </select>
             </div>
         </div>
@@ -111,12 +110,16 @@
         document.getElementById('submitBtn').addEventListener('click', function () {
             const answers = {
                 trendDirection: '-',
-                trendLinear: 'no'
+                trendLinear: 'no',
+                meanDiff: '50',
+                glucoseThreshold: '140'
             };
 
             const userAnswers = {
                 trendDirection: document.getElementById('trendDirection').value,
-                trendLinear: document.getElementById('trendLinear').value
+                trendLinear: document.getElementById('trendLinear').value,
+                meanDiff: document.getElementById('meanDiff').value,
+                glucoseThreshold: document.getElementById('glucoseThreshold').vlaue
             };
 
             let score = 0;
@@ -131,7 +134,7 @@
                 }
             }
 
-            alert(`You scored ${score}/2\n\n${feedback.join('\n')}`);
+            alert(`You scored ${score}/4\n\n${feedback.join('\n')}`);
         });
     </script>
     
