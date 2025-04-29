@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>A Data Communication Quiz</title>
+    <style>
+        body { font-family: sans-serif; }
+        
+        #q2{
+            display: none;
+            margin-top: 20px;
+        }
+        #lockBtn{ margin-top: 10px; }
+        #submitBtn{ margin-top: 20px; }
+    </style>
+</head>
+
+<body>
+    <h1>A Data Communication Quiz</h1>
+    <p>Precisely communicate the results of analyses.</p>
+    <p>Free & No Account Necessary (Unburdensome & Private) (Rare!)</p>
+    <p><i>Disclaimer: data is fake.</i></p>
+
+    <section id="quiz">
+        <div class="question" id="q1">
+            <h2>1: Trend</h2>
+            <img class="one" src="sleepDuration.png" alt="Average Sleep Duration by Age" height="500">
+            <div class="answer">
+                <label>Identify the trend of sleep duration with respect to age.</label>
+                <select id="trendDirection">
+                    <option value="">-- Select --</option>
+                    <option value="+">Positive/Increasing</option>
+                    <option value="-">Negative/Decreasing</option>
+                    <option value="=">Constant/Unchanging</option>
+                </select>
+                <button id="lockBtn">Lock In Answer</button>
+            </div>
+        </div>
+
+        <div class="question" id="q2">
+            <h2>2: Trend Shape</h2>
+            <div class="answer">
+                <label>Is the trend approximately linear?</label>
+                <select id="trendLinear">
+                    <option value="">-- Select --</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+        </div>
+        
+    </section>
+    
+    <section id="quiz">
+        <div class="question" id="q3">
+            <h2>3: Comparing Distributions</h2>
+            <img class="two" src="diabetesPredictor.png" alt="Glucose Densities" height="500">
+        </div>
+    </section>
+    
+    <!-- --------  NEW QUESTIONS  -------- -->
+    <section id="quiz">
+        <!-- 4: Identify – logistic threshold -->
+        <div class="question" id="q4">
+            <h2>4: Glucose Threshold</h2>
+            <!-- swap in your real S-curve image if desired -->
+            <img src="glucoseLogistic.png" alt="Logistic curve – Glucose" height="450">
+            <div class="answer">
+                <label>
+                    At approximately what glucose value does the predicted probability of diabetes
+                    cross 50&nbsp;%?
+                </label>
+                <select id="glucoseThreshold">
+                    <option value="">-- Select --</option>
+                    <option value="100">≈ 100 mg/dL</option>
+                    <option value="125">≈ 125 mg/dL</option>
+                    <option value="150">≈ 150 mg/dL</option>
+                    <option value="200">≈ 200 mg/dL</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- 5: Decide – screening priority -->
+        <div class="question" id="q5">
+            <h2>5: Screening Priority</h2>
+            <p>
+                A clinic can monitor <em>only one</em> measurement for early diabetes screening.
+                Based on the plots and model results, which metric should be prioritised?
+            </p>
+            <div class="answer">
+                <select id="screeningChoice">
+                    <option value="">-- Select --</option>
+                    <option value="glucose">High Glucose</option>
+                    <option value="skin">High Skin Thickness</option>
+                    <option value="neither">Neither – use a different test</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+
+    <button id="submitBtn">Submit</button>
+
+    <script>
+        // Lock-in logic
+        document.getElementById('lockBtn').addEventListener('click', function () {
+            const trendSelect = document.getElementById('trendDirection');
+            if (trendSelect.value === "") {
+                alert("Please select an answer before locking in.");
+                return;
+            }
+            trendSelect.disabled = true;
+            this.disabled = true;
+
+            // Reveal Q2
+            document.getElementById('q2').style.display = 'block';
+        });
+
+        // Submit logic
+        document.getElementById('submitBtn').addEventListener('click', function () {
+            const answers = {
+                trendDirection: '-',
+                trendLinear: 'no'
+            };
+
+            const userAnswers = {
+                trendDirection: document.getElementById('trendDirection').value,
+                trendLinear: document.getElementById('trendLinear').value
+            };
+
+            let score = 0;
+            let feedback = [];
+
+            for (let key in answers) {
+                if (userAnswers[key] === answers[key]) {
+                    score++;
+                    feedback.push(`✅ ${key} — Correct`);
+                } else {
+                    feedback.push(`❌ ${key} — Incorrect (You chose: ${userAnswers[key]}, Correct: ${answers[key]})`);
+                }
+            }
+
+            alert(`You scored ${score}/2\n\n${feedback.join('\n')}`);
+        });
+    </script>
+    
+</body>
+
+</html>
